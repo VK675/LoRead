@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Window theme shown before Compose draws its first frame.
+         The dark background avoids a white flash on launch. The real theme is FolioTheme. -->
+    <style name="Theme.Folio" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/background_dark</item>
+    </style>
+</resources>

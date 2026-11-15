@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Backup rules for Android 11 and older. Book files are large and can be copied again,
+     so they stay out of the backup; settings and reading positions are still backed up. -->
+<full-backup-content>
+    <exclude domain="external" path="books/" />
+</full-backup-content>

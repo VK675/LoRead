@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Folio</string>
+
+    <string name="library_title">Library</string>
+    <string name="library_empty">No books yet</string>
+    <string name="library_empty_hint">Add FB2 files to start reading</string>
+    <string name="add_books">Add books</string>
+    <string name="other_books">Other books</string>
+    <string name="remove_book">Remove from library</string>
+    <string name="open_player">Player</string>
+
+    <string name="chapter_intro">Introduction</string>
+    <string name="chapter_untitled">Chapter %1$d</string>
+    <string name="previous_chapter">Previous</string>
+    <string name="next_chapter">Next</string>
+    <string name="reader_error_unavailable">Can\'t open this file. It may have been moved or deleted.</string>
+    <string name="reader_error_format">This file doesn\'t look like an FB2 book.</string>
+
+    <string name="player_title">Player</string>
+    <string name="player_nothing">Nothing playing</string>
+    <string name="player_placeholder">Playback controls arrive in Stage 1</string>
+    <string name="back">Back</string>
+</resources>
