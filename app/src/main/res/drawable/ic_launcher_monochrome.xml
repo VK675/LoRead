@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Same drawing in one color, for themed icons (Android 13+). Only the shape matters here, the system picks the color.
+     108dp canvas; everything stays inside the central 66dp circle (the "safe zone"),
+     so no launcher mask (circle, squircle, teardrop) cuts into the drawing. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Headband: a half circle from cup to cup -->
+    <path
+        android:pathData="M33,60 L33,54 A21,21 0 0 1 75,54 L75,60"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round" />
+    <!-- Ear cups -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M32,56 h2 a4,4 0 0 1 4,4 v9 a4,4 0 0 1 -4,4 h-2 a4,4 0 0 1 -4,-4 v-9 a4,4 0 0 1 4,-4z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M74,56 h2 a4,4 0 0 1 4,4 v9 a4,4 0 0 1 -4,4 h-2 a4,4 0 0 1 -4,-4 v-9 a4,4 0 0 1 4,-4z" />
+    <!-- Open book between the cups -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M41,61 Q47,58.5 53,61.5 L53,76 Q47,73.5 41,76 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M67,61 Q61,58.5 55,61.5 L55,76 Q61,73.5 67,76 Z" />
+</vector>
