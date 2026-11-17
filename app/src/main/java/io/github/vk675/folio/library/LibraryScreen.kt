@@ -71,6 +71,7 @@ fun LibraryScreen(
     viewModel: LibraryViewModel = viewModel()
 ) {
     val sections by viewModel.sections.collectAsStateWithLifecycle()
+    val folderName by viewModel.folderName.collectAsStateWithLifecycle()
 
     // Runs every time this screen comes to the front: on launch, on return from a book,
     // on return from another app. The block after it runs when the screen goes away.
@@ -87,10 +88,20 @@ fun LibraryScreen(
         viewModel.add(uris)
     }
 
+    // The same picker in folder mode. Returns null if the user backs out.
+    val folderPicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocumentTree()
+    ) { tree ->
+        if (tree != null) viewModel.linkFolder(tree)
+    }
+
     LibraryContent(
         sections = sections,
+        folderName = folderName,
         onOpenBook = onOpenBook,
         onRemoveBook = viewModel::remove,
+        // null = start in the picker's default place.
+        onLinkFolder = { folderPicker.launch(null) },
         // FB2 has no reliable MIME type, so we show all files and check the name ourselves.
         onAddBooks = { picker.launch(arrayOf("*/*")) },
         onOpenPlayer = onOpenPlayer,
@@ -103,8 +114,10 @@ fun LibraryScreen(
 @Composable
 private fun LibraryContent(
     sections: List<LibrarySection>?,   // null while the library is loading
+    folderName: String?,               // null if no folder is linked
     onOpenBook: (Uri) -> Unit,
     onRemoveBook: (Uri) -> Unit,
+    onLinkFolder: () -> Unit,
     onAddBooks: () -> Unit,
     onOpenPlayer: () -> Unit,
     modifier: Modifier = Modifier
@@ -120,6 +133,16 @@ private fun LibraryContent(
             text = stringResource(R.string.library_title),
             style = MaterialTheme.typography.headlineLarge
         )
+        if (folderName != null) {
+            Spacer(Modifier.height(4.dp))
+            Text(
+                text = stringResource(R.string.library_folder, folderName),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
         Spacer(Modifier.height(12.dp))
 
         // weight(1f) gives this part all the height the title and the buttons leave free.
@@ -144,11 +167,17 @@ private fun LibraryContent(
         }
 
         Spacer(Modifier.height(12.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            PanelButton(
+                text = stringResource(R.string.link_folder),
+                onClick = onLinkFolder,
+                // The main action until a folder is linked, then "Add books" takes over.
+                primary = folderName == null
+            )
             PanelButton(
                 text = stringResource(R.string.add_books),
                 onClick = onAddBooks,
-                primary = true
+                primary = folderName != null
             )
             PanelButton(
                 text = stringResource(R.string.open_player),
@@ -330,8 +359,10 @@ private fun LibraryEmptyPreview() {
         AppBackground {
             LibraryContent(
                 sections = emptyList(),
+                folderName = null,
                 onOpenBook = {},
                 onRemoveBook = {},
+                onLinkFolder = {},
                 onAddBooks = {},
                 onOpenPlayer = {}
             )
@@ -370,8 +401,10 @@ private fun LibraryWithBooksPreview() {
                         )
                     )
                 ),
+                folderName = "Download/Books",
                 onOpenBook = {},
                 onRemoveBook = {},
+                onLinkFolder = {},
                 onAddBooks = {},
                 onOpenPlayer = {}
             )
