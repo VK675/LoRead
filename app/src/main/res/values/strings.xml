@@ -18,6 +18,11 @@
 
     <string name="player_title">Player</string>
     <string name="player_nothing">Nothing playing</string>
-    <string name="player_placeholder">Playback controls arrive in Stage 1</string>
+    <string name="player_pick_hint">Pick an audio file to start listening</string>
+    <string name="player_pick">Open audio file</string>
+    <string name="player_play">Play</string>
+    <string name="player_pause">Pause</string>
+    <string name="player_rewind">Back 30 seconds</string>
+    <string name="player_forward">Forward 30 seconds</string>
     <string name="back">Back</string>
 </resources>
